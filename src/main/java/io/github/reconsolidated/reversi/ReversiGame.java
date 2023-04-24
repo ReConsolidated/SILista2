@@ -32,6 +32,8 @@ public class ReversiGame {
             i++;
         }
         System.out.println("Game over!");
+        BoardElement winnerElement = currentBoard.getWinner();
+        System.out.println(winnerElement.name() + " wins!");
     }
 
     private void makeMove(Player player, List<Move> availableMoves) {

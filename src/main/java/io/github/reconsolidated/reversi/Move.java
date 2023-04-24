@@ -34,12 +34,12 @@ public class Move {
             }
         }
         else {
-            int k = Math.min(startingI, i);
-            int l = Math.min(startingJ, j);
-            while (k <= Math.max(startingI, i) && l <= Math.max(startingJ, j)) {
-                boardArray[k][l] = playerElement;
-                k++;
-                l++;
+            int iChange = i - startingI > 0 ? 1 : -1;
+            int jChange = j - startingJ > 0 ? 1 : -1;
+            while (startingI != i && startingJ != j) {
+                boardArray[startingI][startingJ] = playerElement;
+                startingI += iChange;
+                startingJ += jChange;
             }
         }
     }

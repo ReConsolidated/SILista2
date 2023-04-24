@@ -3,11 +3,14 @@ package io.github.reconsolidated.reversi;
 import lombok.Getter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Board {
     @Getter
     private final BoardElement[][] board;
+
+    private List<Move> cachedMoves = null;
 
     public Board() {
         this.board = new BoardElement[8][8];
@@ -148,6 +151,10 @@ public class Board {
             }
         }
 
+        if (cachedMoves != null) {
+            cachedMoves = moves;
+        }
+
         return moves;
     }
 
@@ -170,5 +177,40 @@ public class Board {
             }
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("  0 1 2 3 4 5 6 7\n");
+        for (int i = 0; i < 8; i++) {
+            sb.append(i).append(" ");
+            for (int j = 0; j < 8; j++) {
+                sb.append(this.board[i][j].get()).append(" ");
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+
+    public BoardElement getWinner() {
+        int player1 = 0;
+        int player2 = 0;
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (this.board[i][j] == BoardElement.PLAYER1) {
+                    player1++;
+                } else if (this.board[i][j] == BoardElement.PLAYER2) {
+                    player2++;
+                }
+            }
+        }
+        if (player1 > player2) {
+            return BoardElement.PLAYER1;
+        } else if (player2 > player1) {
+            return BoardElement.PLAYER2;
+        } else {
+            return BoardElement.EMPTY;
+        }
     }
 }

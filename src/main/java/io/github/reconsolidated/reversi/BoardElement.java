@@ -10,4 +10,12 @@ public enum BoardElement {
             case PLAYER2 -> "2";
         };
     }
+
+    public BoardElement getOpposite() {
+        return switch (this) {
+            case EMPTY -> EMPTY;
+            case PLAYER1 -> PLAYER2;
+            case PLAYER2 -> PLAYER1;
+        };
+    }
 }
