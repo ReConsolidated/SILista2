@@ -11,8 +11,8 @@ public class Main {
 
     public static void main(String[] args) {
 	// write your code here
-        Algorithm al1 = new AlphaBeta(6, new PiecesInCornersHeuristic());
-        Algorithm al2 = new AlphaBeta(6, new NumberOfPiecesHeuristic());
+        Algorithm al1 = new AlphaBeta(8, new PiecesInCornersHeuristic());
+        Algorithm al2 = new AlphaBeta(8, new NumberOfPiecesHeuristic());
 
         ReversiGame game = new ReversiGame(new AlgorithmPlayerHandler(al1, true), new AlgorithmPlayerHandler(al2, true));
         game.start();

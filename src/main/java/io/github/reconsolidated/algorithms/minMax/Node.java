@@ -6,9 +6,6 @@ import io.github.reconsolidated.reversi.Move;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Getter
 @Setter
 public class Node {
@@ -16,7 +13,7 @@ public class Node {
     BoardElement element;
     boolean isMaxPlayer;
     double score;
-    List<Node> children = new ArrayList<>();
+    Node bestChild = null;
     Move moveThatLedHere;
 
     public Node(Board board, BoardElement playerElement, boolean isMaxPlayer, Move move) {
@@ -26,17 +23,16 @@ public class Node {
         this.moveThatLedHere = move;
     }
 
-    public Node getBestChild() {
-        Node bestNode = null;
-        for (Node node : children) {
-            if (bestNode == null) {
-                bestNode = node;
-            } else {
-                if (node.getScore() > bestNode.getScore()) {
-                    bestNode = node;
-                }
-            }
+    public void addChild(Node node) {
+        if (bestChild == null) {
+            bestChild = node;
         }
-        return bestNode;
+        else if (node.getScore() > bestChild.getScore()) {
+            bestChild = node;
+        }
+    }
+
+    public Node getBestChild() {
+        return bestChild;
     }
 }

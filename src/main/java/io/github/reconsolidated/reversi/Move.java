@@ -9,17 +9,19 @@ public class Move {
     private int i;
     private int j;
     private BoardElement playerElement;
-
-    private Board boardAfterMove;
+    private Board board;
 
     public Move(Board board, int startingI, int startingJ, int i, int j, BoardElement playerElement) {
+        this.board = board;
         this.startingI = startingI;
         this.startingJ = startingJ;
         this.i = i;
         this.j = j;
         this.playerElement = playerElement;
+    }
 
-        boardAfterMove = board.copy();
+    public Board getBoardAfterMove() {
+        Board boardAfterMove = board.copy();
         BoardElement[][] boardArray = boardAfterMove.getBoard();
         if (startingI == i) {
             for (int k = Math.min(startingJ, j); k <= Math.max(startingJ, j); k++) {
@@ -41,6 +43,7 @@ public class Move {
             }
             boardArray[startingI][startingJ] = playerElement;
         }
+        return boardAfterMove;
     }
 
     @Override

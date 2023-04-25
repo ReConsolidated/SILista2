@@ -36,16 +36,13 @@ public class AlphaBeta implements Algorithm {
         }
         List<Move> moves = node.getBoard().getAvailableMoves(node.getElement());
 
-
-        for (Move move : moves) {
-            Board b = move.getBoardAfterMove();
-            Node child = new Node(b, node.getElement().getOpposite(), !node.isMaxPlayer(), move);
-            node.getChildren().add(child);
-        }
-
         if (maximizingPlayer) {
             double maxEval = Double.NEGATIVE_INFINITY;
-            for (Node child : node.getChildren()) {
+
+            for (Move move : moves) {
+                Board b = move.getBoardAfterMove();
+                Node child = new Node(b, node.getElement().getOpposite(), !node.isMaxPlayer(), move);
+                node.addChild(child);
                 double eval = minimax(child, depth - 1, alpha, beta, false);
                 child.setScore(eval);
                 maxEval = Math.max(maxEval, eval);
@@ -58,8 +55,13 @@ public class AlphaBeta implements Algorithm {
         }
         else {
             double minEval = Double.POSITIVE_INFINITY;
-            for (Node child : node.getChildren()) {
+
+            for (Move move : moves) {
+                Board b = move.getBoardAfterMove();
+                Node child = new Node(b, node.getElement().getOpposite(), !node.isMaxPlayer(), move);
+                node.addChild(child);
                 double eval = minimax(child, depth - 1, alpha, beta, true);
+                child.setScore(eval);
                 minEval = Math.min(minEval, eval);
                 beta = Math.min(beta, minEval);
                 if (beta <= alpha) {
