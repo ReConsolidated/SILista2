@@ -2,7 +2,6 @@ package io.github.reconsolidated.algorithms.alphaBeta;
 
 import io.github.reconsolidated.algorithms.Algorithm;
 import io.github.reconsolidated.heuristic.Heuristic;
-import io.github.reconsolidated.algorithms.minMax.Node;
 import io.github.reconsolidated.reversi.Board;
 import io.github.reconsolidated.reversi.BoardElement;
 import io.github.reconsolidated.reversi.Move;

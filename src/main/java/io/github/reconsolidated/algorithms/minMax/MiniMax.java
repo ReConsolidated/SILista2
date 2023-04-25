@@ -8,7 +8,6 @@ import io.github.reconsolidated.reversi.BoardElement;
 import io.github.reconsolidated.reversi.Move;
 import lombok.AllArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -26,7 +25,7 @@ public class MiniMax implements Algorithm {
         constructTree(root, 0);
 
         scoreTree(tree);
-        return root.getBestChild().getMoveThatLedHere();
+        return findBestChild(root.isMaxPlayer, root.getChildren()).getMoveThatLedHere();
     }
 
     private void scoreTree(Tree tree) {
@@ -37,12 +36,12 @@ public class MiniMax implements Algorithm {
         if (depth >= maxDepth) {
             return;
         }
-        List<Move> moves = parentNode.getBoard().getAvailableMoves(parentNode.getElement().getOpposite());
+        List<Move> moves = parentNode.getBoard().getAvailableMoves(parentNode.getElement());
 
         for (Move move : moves) {
             Board b = move.getBoardAfterMove();
             Node node = new Node(b, parentNode.getElement().getOpposite(), !parentNode.isMaxPlayer(), move);
-            parentNode.addChild(node);
+            parentNode.getChildren().add(node);
             if (node.getBoard().getAvailableMoves(node.getElement().getOpposite()).size() > 0) {
                 constructTree(node, depth + 1);
             }
@@ -71,7 +70,7 @@ public class MiniMax implements Algorithm {
             node.setScore(heuristic.score(node.getBoard(), node.getElement()));
             return;
         }
-        List<Node> children = new ArrayList<>();//node.getChildren();
+        List<Node> children = node.getChildren();
         boolean isMaxPlayer = node.isMaxPlayer;
 
         children.forEach(child -> {

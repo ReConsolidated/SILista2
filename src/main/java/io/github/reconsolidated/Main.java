@@ -2,6 +2,7 @@ package io.github.reconsolidated;
 
 import io.github.reconsolidated.algorithms.Algorithm;
 import io.github.reconsolidated.algorithms.alphaBeta.AlphaBeta;
+import io.github.reconsolidated.algorithms.minMax.MiniMax;
 import io.github.reconsolidated.heuristic.NumberOfPiecesHeuristic;
 import io.github.reconsolidated.heuristic.PiecesInCornersHeuristic;
 import io.github.reconsolidated.playerHandlers.AlgorithmPlayerHandler;
@@ -11,8 +12,8 @@ public class Main {
 
     public static void main(String[] args) {
 	// write your code here
-        Algorithm al1 = new AlphaBeta(8, new PiecesInCornersHeuristic());
-        Algorithm al2 = new AlphaBeta(8, new NumberOfPiecesHeuristic());
+        Algorithm al1 = new AlphaBeta(5, new PiecesInCornersHeuristic());
+        Algorithm al2 = new MiniMax(3, new NumberOfPiecesHeuristic());
 
         ReversiGame game = new ReversiGame(new AlgorithmPlayerHandler(al1, true), new AlgorithmPlayerHandler(al2, true));
         game.start();
