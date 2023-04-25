@@ -1,7 +1,8 @@
 package io.github.reconsolidated.playerHandlers;
 
+import io.github.reconsolidated.algorithms.Algorithm;
+import io.github.reconsolidated.algorithms.alphaBeta.AlphaBeta;
 import io.github.reconsolidated.heuristic.NumberOfPiecesHeuristic;
-import io.github.reconsolidated.minMax.MiniMax;
 import io.github.reconsolidated.reversi.Board;
 import io.github.reconsolidated.reversi.BoardElement;
 import io.github.reconsolidated.reversi.Move;
@@ -17,7 +18,7 @@ public class MinMaxPlayerHandler implements PlayerHandler {
 
     @Override
     public Move getMove(Board board, BoardElement playerElement, List<Move> availableMoves) {
-        MiniMax miniMax = new MiniMax(depth, new NumberOfPiecesHeuristic());
+        Algorithm miniMax = new AlphaBeta(new NumberOfPiecesHeuristic(), depth);
         if (showMessages) {
             System.out.println("Calculating my move...");
         }

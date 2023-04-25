@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
 	// write your code here
-        ReversiGame game = new ReversiGame(new MinMaxPlayerHandler(true, 6), new MinMaxPlayerHandler(true, 3));
+        ReversiGame game = new ReversiGame(new MinMaxPlayerHandler(true, 2), new MinMaxPlayerHandler(true, 6));
         game.start();
     }
 }

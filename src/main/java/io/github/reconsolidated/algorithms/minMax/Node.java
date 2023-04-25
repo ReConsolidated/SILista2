@@ -1,4 +1,4 @@
-package io.github.reconsolidated.minMax;
+package io.github.reconsolidated.algorithms.minMax;
 
 import io.github.reconsolidated.reversi.Board;
 import io.github.reconsolidated.reversi.BoardElement;
@@ -24,5 +24,19 @@ public class Node {
         this.element = playerElement;
         this.isMaxPlayer = isMaxPlayer;
         this.moveThatLedHere = move;
+    }
+
+    public Node getBestChild() {
+        Node bestNode = null;
+        for (Node node : children) {
+            if (bestNode == null) {
+                bestNode = node;
+            } else {
+                if (node.getScore() > bestNode.getScore()) {
+                    bestNode = node;
+                }
+            }
+        }
+        return bestNode;
     }
 }

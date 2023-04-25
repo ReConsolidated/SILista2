@@ -41,6 +41,10 @@ public class Move {
                 startingI += iChange;
                 startingJ += jChange;
             }
+            boardArray[startingI][startingJ] = playerElement;
+        }
+        if (boardBeforeMove.toString().equals(boardAfterMove.toString())) {
+            throw new RuntimeException("Move is not valid");
         }
     }
 

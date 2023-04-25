@@ -1,6 +1,7 @@
-package io.github.reconsolidated.minMax;
+package io.github.reconsolidated.algorithms.minMax;
 
 
+import io.github.reconsolidated.algorithms.Algorithm;
 import io.github.reconsolidated.heuristic.Heuristic;
 import io.github.reconsolidated.reversi.Board;
 import io.github.reconsolidated.reversi.BoardElement;
@@ -12,10 +13,11 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @AllArgsConstructor
-public class MiniMax {
+public class MiniMax implements Algorithm {
     private int maxDepth;
     private Heuristic heuristic;
 
+    @Override
     public Move getBestMove(Board board, BoardElement playerElement) {
         Tree tree = new Tree();
         Node root = new Node(board, playerElement, true, null);
@@ -70,6 +72,7 @@ public class MiniMax {
         }
         List<Node> children = node.getChildren();
         boolean isMaxPlayer = node.isMaxPlayer;
+
         children.forEach(child -> {
             if (checkWin(child.getBoard(), child.getElement())) {
                 child.setScore(isMaxPlayer ? 1 : -1);

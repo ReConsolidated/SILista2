@@ -1,4 +1,4 @@
-package io.github.reconsolidated.minMax;
+package io.github.reconsolidated.algorithms.minMax;
 
 import lombok.Getter;
 import lombok.Setter;
