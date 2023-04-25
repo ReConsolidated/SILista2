@@ -10,7 +10,6 @@ public class Move {
     private int j;
     private BoardElement playerElement;
 
-    private Board boardBeforeMove;
     private Board boardAfterMove;
 
     public Move(Board board, int startingI, int startingJ, int i, int j, BoardElement playerElement) {
@@ -20,7 +19,6 @@ public class Move {
         this.j = j;
         this.playerElement = playerElement;
 
-        boardBeforeMove = board.copy();
         boardAfterMove = board.copy();
         BoardElement[][] boardArray = boardAfterMove.getBoard();
         if (startingI == i) {
@@ -42,9 +40,6 @@ public class Move {
                 startingJ += jChange;
             }
             boardArray[startingI][startingJ] = playerElement;
-        }
-        if (boardBeforeMove.toString().equals(boardAfterMove.toString())) {
-            throw new RuntimeException("Move is not valid");
         }
     }
 

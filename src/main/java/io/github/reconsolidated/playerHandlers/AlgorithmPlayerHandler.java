@@ -2,6 +2,7 @@ package io.github.reconsolidated.playerHandlers;
 
 import io.github.reconsolidated.algorithms.Algorithm;
 import io.github.reconsolidated.algorithms.alphaBeta.AlphaBeta;
+import io.github.reconsolidated.heuristic.Heuristic;
 import io.github.reconsolidated.heuristic.NumberOfPiecesHeuristic;
 import io.github.reconsolidated.reversi.Board;
 import io.github.reconsolidated.reversi.BoardElement;
@@ -12,17 +13,16 @@ import lombok.AllArgsConstructor;
 import java.util.List;
 
 @AllArgsConstructor
-public class MinMaxPlayerHandler implements PlayerHandler {
+public class AlgorithmPlayerHandler implements PlayerHandler {
+    private Algorithm algorithm;
     private boolean showMessages;
-    private int depth;
 
     @Override
     public Move getMove(Board board, BoardElement playerElement, List<Move> availableMoves) {
-        Algorithm miniMax = new AlphaBeta(new NumberOfPiecesHeuristic(), depth);
         if (showMessages) {
             System.out.println("Calculating my move...");
         }
-        Move move = miniMax.getBestMove(board, playerElement);
+        Move move = algorithm.getBestMove(board, playerElement);
         if (showMessages) {
             System.out.println("My move is: " + move);
             System.out.println("New board state: ");

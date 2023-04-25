@@ -12,17 +12,14 @@ import java.util.List;
 
 @AllArgsConstructor
 public class AlphaBeta implements Algorithm {
-    private Heuristic heuristic;
     private int maxDepth;
+    private Heuristic heuristic;
 
     @Override
     public Move getBestMove(Board board, BoardElement playerElement) {
         Node root = new Node(board, playerElement, true, null);
         minimax(root, maxDepth, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY, true);
         Node bestChild = root.getBestChild();
-        if (bestChild == null) {
-            System.out.println("Elo");
-        }
         return bestChild.getMoveThatLedHere();
     }
 

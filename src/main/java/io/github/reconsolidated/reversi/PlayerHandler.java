@@ -1,5 +1,7 @@
 package io.github.reconsolidated.reversi;
 
+import io.github.reconsolidated.algorithms.Algorithm;
+
 import java.util.List;
 
 public interface PlayerHandler {

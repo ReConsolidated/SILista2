@@ -161,9 +161,7 @@ public class Board {
     public Board copy() {
         Board copy = new Board();
         for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                copy.board[i][j] = this.board[i][j];
-            }
+            System.arraycopy(this.board[i], 0, copy.board[i], 0, 8);
         }
         return copy;
     }
