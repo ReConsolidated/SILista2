@@ -24,6 +24,13 @@ public class AlphaBeta implements Algorithm {
     }
 
     private double minimax(Node node, int depth, double alpha, double beta, boolean maximizingPlayer) {
+        if (node.getBoard().isFinished()) {
+            if (node.getBoard().getWinner().equals(node.getElement())) {
+                return Double.POSITIVE_INFINITY;
+            } else {
+                return Double.NEGATIVE_INFINITY;
+            }
+        }
         if (depth == 0) {
             return heuristic.score(node.getBoard(), node.getElement());
         }
